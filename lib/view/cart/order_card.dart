@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pizza_riverpod/data/pizza.dart';
 import 'package:flutter_pizza_riverpod/models/order.dart';
 import 'package:flutter_pizza_riverpod/service/order_provider.dart';
+import 'package:flutter_pizza_riverpod/service/snackbar_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OrderCard extends ConsumerWidget {
@@ -13,7 +13,6 @@ class OrderCard extends ConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pizzas = getPizza();
     return Card(
       elevation: 5,
       margin: const EdgeInsets.all(5),
@@ -36,12 +35,12 @@ class OrderCard extends ConsumerWidget {
               'Pizzas commandées:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text(order.pizzas.map((x) => x.name).join("| ")),
+            Text(order.pizzasOrder.map((x) => x.name).join("| ")),
             const Divider(),
             Row(
               children: [
                 Text(
-                  'Prix total: ${order.pizzas.fold(0.0, (total, pizza) => total + pizza.price).toStringAsFixed(2)} €',
+                  'Prix total: ${order.pizzasOrder.fold(0.0, (total, pizza) => total + pizza.price).toStringAsFixed(2)} €',
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -51,6 +50,8 @@ class OrderCard extends ConsumerWidget {
                       ref
                           .watch(orderStreamProvider.notifier)
                           .deleteOrder(order.id);
+                      SnackbarService(context).showSnackbar(
+                          title: "Commande Supprimer", type: Type.succes);
                     },
                     child: const Text("Delete"))
               ],

@@ -8,7 +8,7 @@ class CardPizza extends StatelessWidget {
   final Pizza pizza;
 
   void showPizzaDialog(BuildContext context, Pizza pizza) {
-    showDialog(
+    showBottomSheet(
       context: context,
       builder: (BuildContext context) {
         return PizzaDialog(
@@ -22,13 +22,14 @@ class CardPizza extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 5,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Image.asset(
-              'asset/images/img.png',
-              fit: BoxFit.cover,
+            Image.network(
+              pizza.imageUrl,
+              fit: BoxFit.contain,
               width: 100,
               height: 155,
             ),
@@ -52,17 +53,22 @@ class CardPizza extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Medium | ${pizza.ingredients.map((e) => e.name).join('| ')}',
-                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                    pizza.ingredients.join('| '),
+                    style: const TextStyle(fontSize: 13, color: Colors.black),
                   ),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$${pizza.price.toStringAsFixed(2)}',
+                        'M: ${pizza.priceMedium.toStringAsFixed(2)} €',
                         style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'L: ${pizza.priceLarge.toStringAsFixed(2)} €',
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       ElevatedButton(
                         onPressed: () {

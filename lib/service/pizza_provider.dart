@@ -14,8 +14,7 @@ class PizzaNotifier extends StateNotifier<List<Pizza>> {
   PizzaNotifier(this.ref) : super([]);
 
   Future<void> loadPizzas() async {
-    FirebaseFirestore.instance.collection('pizzas').orderBy("price").get().then(
-        (snapshots) {
+    FirebaseFirestore.instance.collection('pizzas').get().then((snapshots) {
       //state et l'appelation du StateNotifier List<Pizza>
       state = List.from(
         snapshots.docs
@@ -33,15 +32,14 @@ class PizzaNotifier extends StateNotifier<List<Pizza>> {
       List<Pizza> pizzas = getPizza();
 
       for (Pizza pizza in pizzas) {
-        List<String> ingredientNames =
-            pizza.ingredients.map((ingredient) => ingredient.name).toList();
-
         await FirebaseFirestore.instance.collection('pizzas').add({
           "name": pizza.name,
           "name_lowercase": pizza.name.toLowerCase(),
-          "price": pizza.price,
+          "imageUrl": pizza.imageUrl,
+          "priceLarge": pizza.priceLarge,
+          "priceMedium": pizza.priceMedium,
           "isVegan": pizza.isVegan,
-          'ingredients': ingredientNames
+          'ingredients': pizza.ingredients
         });
 
         print("Pizza ajoutée : ${pizza.name}");

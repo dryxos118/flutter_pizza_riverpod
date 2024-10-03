@@ -23,7 +23,7 @@ class PizzaList extends ConsumerWidget {
                             shrinkWrap: true,
                             children: pizzasList.map((Pizza pizza) {
                               return SizedBox(
-                                height: 155,
+                                height: 160,
                                 child: CardPizza(pizza: pizza),
                               );
                             }).toList())

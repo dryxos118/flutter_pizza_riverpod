@@ -1,39 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_pizza_riverpod/models/ingredients.dart';
 
 class Pizza {
   String? id;
   String name;
-  double price;
-  bool isVegan;
-  List<Ingredient> ingredients;
+  List<String> ingredients;
+  String imageUrl;
+  double priceMedium;
+  double priceLarge;
+  bool isVegan = false;
 
-  Pizza({
-    this.id,
-    required this.name,
-    required this.price,
-    required this.isVegan,
-    required this.ingredients,
-  });
+  Pizza(
+      {this.id,
+      required this.name,
+      required this.ingredients,
+      required this.imageUrl,
+      required this.priceMedium,
+      required this.priceLarge,
+      required this.isVegan});
 
   // Méthode pour créer une Pizza depuis un document Firestore
   factory Pizza.fromFirestore(DocumentSnapshot doc) {
     final data = doc;
 
-    // Récupération des ingrédients sous forme de List<Map> et conversion en List<Ingredient>
-    var ingredientsData = data['ingredients'] as List<dynamic>?;
-    List<Ingredient> ingredients = ingredientsData != null
-        ? ingredientsData
-            .map((ingredientData) => Ingredient.fromFirestore(ingredientData))
-            .toList()
-        : [];
+    List<dynamic> ingredientsDoc = data["ingredients"];
 
     return Pizza(
       id: doc.id,
       name: data['name'] ?? 'Inconnu',
-      price: (data['price'].toDouble() ?? 0.0),
+      imageUrl: data['imageUrl'],
+      priceMedium: (data['priceMedium'].toDouble() ?? 0.0),
+      priceLarge: (data["priceLarge"].toDouble() ?? 0.0),
       isVegan: data['isVegan'] ?? false,
-      ingredients: ingredients,
+      ingredients: ingredientsDoc.map((item) => item.toString()).toList(),
     );
   }
 
@@ -41,22 +39,25 @@ class Pizza {
     return {
       'id': id,
       'name': name,
-      'price': price,
+      'priceMedium': priceMedium,
+      'priceLarge': priceLarge,
+      'imageUrl': imageUrl,
       'isVegan': isVegan,
-      'ingredients': ingredients.map((e) => e.toMap()).toList(),
+      'ingredients': ingredients,
     };
   }
 
   // Convert a map from Firebase to a PizzaDTO
   static Pizza fromMap(Map<String, dynamic> map) {
+    List<dynamic> ingredientsDoc = map["ingredients"];
+
     return Pizza(
-      id: map['id'],
-      name: map['name'],
-      price: map['price'],
-      isVegan: map['isVegan'],
-      ingredients: (map['ingredients'] as List)
-          .map((i) => Ingredient.fromMap(i))
-          .toList(),
-    );
+        id: map['id'],
+        name: map['name'],
+        imageUrl: map['imageUrl'],
+        priceMedium: map['priceMedium'],
+        priceLarge: map['priceLarge'],
+        isVegan: map['isVegan'],
+        ingredients: ingredientsDoc.map((item) => item.toString()).toList());
   }
 }
