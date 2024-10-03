@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pizza_riverpod/data/pizza.dart';
 import 'package:flutter_pizza_riverpod/models/order.dart';
-import 'package:flutter_pizza_riverpod/models/pizza.dart';
 import 'package:flutter_pizza_riverpod/service/order_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

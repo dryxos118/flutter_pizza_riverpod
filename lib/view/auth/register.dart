@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_pizza_riverpod/models/promo.dart';
 import 'package:flutter_pizza_riverpod/models/user.dart';
 import 'package:flutter_pizza_riverpod/service/user_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class Register extends HookConsumerWidget {
@@ -11,22 +12,26 @@ class Register extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _obscureText = useState(false);
+    final obscureText = useState(false);
     final pseudo = useState("");
     final email = useState("");
     final password = useState("");
     final selectedPromotion = useState(Promo.CDA);
+    final userProv = ref.watch(userProvider);
     void submitForm() {
       if (_formKey.currentState?.validate() ?? false) {
         _formKey.currentState?.save();
         User user = User(promo: selectedPromotion.value);
         ref.watch(userNotifier.notifier).registerInFirebase(
             user: user, email: email.value, password: password.value);
+        if (userProv != null) {
+          context.go("/");
+        }
       }
     }
 
     void togglePasswordVisibility() {
-      _obscureText.value = !_obscureText.value;
+      obscureText.value = !obscureText.value;
     }
 
     return Center(
@@ -86,13 +91,13 @@ class Register extends HookConsumerWidget {
                           labelText: 'Password',
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _obscureText.value
+                              obscureText.value
                                   ? Icons.visibility
                                   : Icons.visibility_off,
                             ),
                             onPressed: togglePasswordVisibility,
                           )),
-                      obscureText: !_obscureText.value,
+                      obscureText: !obscureText.value,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Entrez votre password !';

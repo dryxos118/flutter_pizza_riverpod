@@ -24,7 +24,6 @@ class Orders {
   }
 
   static Orders fromMap(DocumentSnapshot doc) {
-    final data = doc;
     return Orders(
       id: doc.id,
       user: doc["user"],
