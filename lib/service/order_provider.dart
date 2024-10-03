@@ -23,7 +23,7 @@ class OrderStreamNotifier extends StreamNotifier<List<Orders>> {
     }
   }
 
-  Future<void> deleteOrder(String id) async {
+  Future<void> deleteOrder(String? id) async {
     try {
       await FirebaseFirestore.instance.collection('orders').doc(id).delete();
     } catch (e) {

@@ -14,20 +14,29 @@ class PizzaList extends ConsumerWidget {
     return BaseScaffold(
         body: ref.watch(loadingProvider)
             ? const Center(child: CircularProgressIndicator())
-            : SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        children: pizzasList.map((Pizza pizza) {
-                          return SizedBox(
-                            height: 155,
-                            child: CardPizza(pizza: pizza),
-                          );
-                        }).toList())
-                  ],
-                ),
-              ));
+            : pizzasList.isNotEmpty
+                ? SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ListView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            children: pizzasList.map((Pizza pizza) {
+                              return SizedBox(
+                                height: 155,
+                                child: CardPizza(pizza: pizza),
+                              );
+                            }).toList())
+                      ],
+                    ),
+                  )
+                : Center(
+                    child: IconButton(
+                        onPressed: () async {
+                          await ref
+                              .watch(pizzaProviderNotifier.notifier)
+                              .initializeDb();
+                        },
+                        icon: const Icon(Icons.replay_outlined))));
   }
 }

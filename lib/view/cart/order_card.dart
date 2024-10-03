@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pizza_riverpod/data/pizza.dart';
 import 'package:flutter_pizza_riverpod/models/order.dart';
+import 'package:flutter_pizza_riverpod/models/pizza.dart';
 import 'package:flutter_pizza_riverpod/service/order_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,48 +12,50 @@ class OrderCard extends ConsumerWidget {
     super.key,
     required this.order,
   });
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final pizzas = getPizza();
     return Card(
       elevation: 5,
       margin: const EdgeInsets.all(5),
       child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Row(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Text(
+              'Nom d\'utilisateur: ${order.user}',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Date de la commande: ${order.date.toUtc().toIso8601String()}',
+              style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Pizzas commandées:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text(order.pizzas.map((x) => x.name).join("| ")),
+            const Divider(),
+            Row(
               children: [
                 Text(
-                  order.pizzas.first.name,
+                  'Prix total: ${order.pizzas.fold(0.0, (total, pizza) => total + pizza.price).toStringAsFixed(2)} €',
                   style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  order.date.toString(),
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  '${order.pizzas.first.price}€',
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () => ref
-                      .read(orderStreamProvider.notifier)
-                      .deleteOrder(order.id!),
-                  icon: const Icon(Icons.remove_circle_outline),
-                ),
+                const Spacer(),
+                TextButton(
+                    onPressed: () {
+                      ref
+                          .watch(orderStreamProvider.notifier)
+                          .deleteOrder(order.id);
+                    },
+                    child: const Text("Delete"))
               ],
-            ),
+            )
           ],
         ),
       ),

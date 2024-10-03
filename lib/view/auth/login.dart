@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_pizza_riverpod/service/fireauth_provider.dart';
 import 'package:flutter_pizza_riverpod/service/user_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,16 +15,22 @@ class Login extends HookConsumerWidget {
     final pseudo = useState("");
     final password = useState("");
     final obscureText = useState(false);
-    Future<void> submitForm() async {
+    final user = ref.watch(userProvider);
+
+    Future<void> submitForm(VoidCallback onSubmited) async {
       if (_formKey.currentState?.validate() ?? false) {
         _formKey.currentState?.save();
-        print(pseudo);
-        print(password);
+        print(pseudo.value);
+        print(password.value);
+
+        // Exécution de la logique de login
         await ref
             .watch(userNotifier.notifier)
             .loginInFirebase(email: pseudo.value, password: password.value);
-        if (ref.watch(userProvider) != null) {
-          context.go("/");
+
+        // Si tout est OK, exécuter le callback
+        if (user != null) {
+          onSubmited();
         }
       }
     }
@@ -95,7 +102,9 @@ class Login extends HookConsumerWidget {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: submitForm,
+                      onPressed: () => submitForm(
+                        () => context.go("/"),
+                      ),
                       child: const Text('Connection'),
                     ),
                   ],

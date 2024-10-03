@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_pizza_riverpod/service/user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_pizza_riverpod/models/user.dart' as app;
 
 final firebaseProvider = StateProvider<User?>((ref) => null);
 
@@ -22,6 +25,15 @@ class FirebaseProvider extends StateNotifier<FirebaseAuth?> {
           }
         },
       );
+      if (state?.currentUser != null) {
+        final user = state?.currentUser;
+        final snapshot = await FirebaseFirestore.instance
+            .collection('user')
+            .doc(user!.uid)
+            .get();
+        ref.read(userProvider.notifier).state =
+            app.User.fromSnapshot(snapshot.data(), user.uid);
+      }
     }
   }
 
@@ -41,7 +53,6 @@ class FirebaseProvider extends StateNotifier<FirebaseAuth?> {
   Future<bool> logout() async {
     try {
       await state!.signOut();
-      ref.read(firebaseProvider.notifier).state = null;
       return true;
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -52,10 +63,12 @@ class FirebaseProvider extends StateNotifier<FirebaseAuth?> {
   Future<UserCredential?> login(
       {required String email, required String password}) async {
     try {
-      return await state!.signInWithEmailAndPassword(
+      var t = await state!.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      print(state);
+      return t;
     } on FirebaseAuthException catch (e) {
       print(e.message);
     }

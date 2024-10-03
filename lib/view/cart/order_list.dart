@@ -13,14 +13,18 @@ class OrderList extends ConsumerWidget {
     return BaseScaffold(
       body: orderAsyncValue.when(
         data: (data) => data.isNotEmpty
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView(
-                  shrinkWrap: true,
-                  children:
-                      data.map((order) => OrderCard(order: order)).toList(),
-                ),
-              )
+            ? SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: data
+                        .map(
+                            (order) => SizedBox(child: OrderCard(order: order)))
+                        .toList(),
+                  ),
+                ))
             : const Center(child: Text("Aucune commande")),
         error: (err, stack) => Container(),
         loading: () => const CircularProgressIndicator(),

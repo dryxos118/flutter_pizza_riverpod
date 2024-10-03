@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pizza_riverpod/models/order.dart';
 import 'package:flutter_pizza_riverpod/models/pizza.dart';
+import 'package:flutter_pizza_riverpod/service/fireauth_provider.dart';
 import 'package:flutter_pizza_riverpod/service/order_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,6 +17,7 @@ class PizzaDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userName = ref.watch(firebaseNotifier)!.currentUser?.email;
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -59,9 +61,8 @@ class PizzaDialog extends ConsumerWidget {
                     onAddPizza!(pizza);
                     List<Pizza> test = [];
                     test.add(pizza);
-                    ref
-                        .watch(orderStreamProvider.notifier)
-                        .addOrder(Orders(pizzas: test, date: DateTime.now()));
+                    ref.watch(orderStreamProvider.notifier).addOrder(Orders(
+                        pizzas: test, date: DateTime.now(), user: userName));
                     Navigator.of(context).pop();
                   },
                   child: const Text('Ajouter Pizza'),

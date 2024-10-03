@@ -12,11 +12,14 @@ class BaseScaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
     void onLoginPressed(BuildContext context) {
-      if (ref.watch(userProvider) != null) {
-        ref.watch(userNotifier.notifier).logoutFromFirebase();
+      if (user != null) {
+        print("logout");
+        ref.read(userNotifier.notifier).logoutFromFirebase();
         context.go("/login");
       } else {
+        print("login");
         context.go("/login");
       }
     }
