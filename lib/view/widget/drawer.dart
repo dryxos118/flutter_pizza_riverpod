@@ -21,7 +21,7 @@ class Menu extends StatelessWidget {
               height: 125,
               child: DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Color(0xFF25B7A5),
                 ),
                 child: Text(
                   'Navigation',
@@ -36,8 +36,9 @@ class Menu extends StatelessWidget {
             ListTile(
               leading: const Icon(
                 Icons.local_pizza,
+                color: Colors.white,
               ),
-              title: const Text('Pizza', style: TextStyle(fontSize: 20)),
+              title: const Text('Pizza', style: TextStyle(fontSize: 20, color: Colors.white)),
               onTap: () {
                 context.go("/");
                 Navigator.pop(context);
@@ -47,8 +48,9 @@ class Menu extends StatelessWidget {
             ListTile(
               leading: const Icon(
                 Icons.shopping_cart,
+                color: Colors.white,
               ),
-              title: const Text('Panier', style: TextStyle(fontSize: 20)),
+              title: const Text('Panier', style: TextStyle(fontSize: 20, color: Colors.white)),
               onTap: () {
                 context.go("/panier");
                 Navigator.pop(context);

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pizza_riverpod/models/pizza.dart';
 import 'package:flutter_pizza_riverpod/view/pizza/dialog_pizza.dart';
@@ -42,8 +43,7 @@ class CardPizza extends StatelessWidget {
                     children: [
                       Text(
                         pizza.name,
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       if (pizza.isVegan) ...{
                         const SizedBox(width: 8),
@@ -53,7 +53,7 @@ class CardPizza extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    pizza.ingredients.join('| '),
+                    pizza.ingredients.join(' | '),
                     style: const TextStyle(fontSize: 13, color: Colors.black),
                   ),
                   const SizedBox(height: 10),
@@ -62,13 +62,11 @@ class CardPizza extends StatelessWidget {
                     children: [
                       Text(
                         'M: ${pizza.priceMedium.toStringAsFixed(2)} €',
-                        style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         'L: ${pizza.priceLarge.toStringAsFixed(2)} €',
-                        style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       ElevatedButton(
                         onPressed: () {
