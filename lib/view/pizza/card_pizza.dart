@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pizza_riverpod/models/pizza.dart';
 import 'package:flutter_pizza_riverpod/view/pizza/dialog_pizza.dart';
@@ -25,7 +24,7 @@ class CardPizza extends StatelessWidget {
     return Card(
       elevation: 5,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Row(
           children: [
             Image.network(
@@ -43,7 +42,8 @@ class CardPizza extends StatelessWidget {
                     children: [
                       Text(
                         pizza.name,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       if (pizza.isVegan) ...{
                         const SizedBox(width: 8),
@@ -62,11 +62,13 @@ class CardPizza extends StatelessWidget {
                     children: [
                       Text(
                         'M: ${pizza.priceMedium.toStringAsFixed(2)} €',
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         'L: ${pizza.priceLarge.toStringAsFixed(2)} €',
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       ElevatedButton(
                         onPressed: () {

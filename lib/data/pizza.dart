@@ -6,8 +6,8 @@ List<Pizza> getPizza() {
       name: "MARGARITA",
       ingredients: ["Sauce tomate", "fromage", "olives", "origan"],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_158.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
@@ -22,8 +22,8 @@ List<Pizza> getPizza() {
         "olives"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_159.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
@@ -39,8 +39,8 @@ List<Pizza> getPizza() {
         "olives"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_160.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
@@ -52,8 +52,8 @@ List<Pizza> getPizza() {
         "champignons"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_161.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
@@ -66,8 +66,8 @@ List<Pizza> getPizza() {
         "oignons"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_162.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
@@ -80,8 +80,8 @@ List<Pizza> getPizza() {
         "oignons"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_163.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
@@ -94,8 +94,8 @@ List<Pizza> getPizza() {
         "tomates fraîches"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_164.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
@@ -109,8 +109,8 @@ List<Pizza> getPizza() {
         "oignons"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_165.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
@@ -123,8 +123,8 @@ List<Pizza> getPizza() {
         "oignons"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_166.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
@@ -138,24 +138,24 @@ List<Pizza> getPizza() {
         "oeuf"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_167.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
       name: "MEXICAINE",
       ingredients: ["Sauce tomate", "fromage", "chorizo", "poulet", "oignons"],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_168.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
       name: "HAWAIENNE",
       ingredients: ["Sauce tomate", "fromage", "ananas", "jambon de dinde"],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_169.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
@@ -167,8 +167,8 @@ List<Pizza> getPizza() {
         "champignons"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_170.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
@@ -182,16 +182,16 @@ List<Pizza> getPizza() {
         "olives"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_171.png",
-      priceMedium: 12.00,
-      priceLarge: 8.90,
+      priceMedium: 8.90,
+      priceLarge: 12.00,
       isVegan: false,
     ),
     Pizza(
       name: "PECHEUR",
       ingredients: ["Sauce tomate", "fromage", "thon", "oignons", "origan"],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_172.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
@@ -204,16 +204,16 @@ List<Pizza> getPizza() {
         "origan"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_173.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
       name: "4 FROMAGES",
       ingredients: ["Sauce tomate", "fromage", "brie", "chèvre", "bleu"],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_174.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
@@ -227,8 +227,8 @@ List<Pizza> getPizza() {
         "sauce poivre"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_212.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
@@ -243,8 +243,8 @@ List<Pizza> getPizza() {
         "persillade"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_204.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(
@@ -260,8 +260,8 @@ List<Pizza> getPizza() {
         "sauce barbecue"
       ],
       imageUrl: "https://www.mozzapizza.fr/produit/1192_221.png",
-      priceMedium: 13.00,
-      priceLarge: 9.50,
+      priceMedium: 9.50,
+      priceLarge: 13.00,
       isVegan: false,
     ),
     Pizza(

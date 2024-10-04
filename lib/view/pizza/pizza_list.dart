@@ -22,9 +22,9 @@ class PizzaList extends ConsumerWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             children: pizzasList.map((Pizza pizza) {
-                              return SizedBox(
-                                height: 170,
-                                child: CardPizza(pizza: pizza),
+                              return Wrap(
+                                spacing: 8,
+                                children: [CardPizza(pizza: pizza)],
                               );
                             }).toList())
                       ],
@@ -33,7 +33,9 @@ class PizzaList extends ConsumerWidget {
                 : Center(
                     child: IconButton(
                         onPressed: () async {
-                          await ref.watch(pizzaProviderNotifier.notifier).initializeDb();
+                          await ref
+                              .watch(pizzaProviderNotifier.notifier)
+                              .initializeDb();
                         },
                         icon: const Icon(Icons.replay_outlined))));
   }

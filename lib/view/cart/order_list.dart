@@ -23,12 +23,18 @@ class OrderList extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
                           'Prix total: ${data.map((pizzasOrder) => pizzasOrder.pizzasOrder.fold(0.0, (total, pizza) => total + pizza.price)).fold(0.0, (total, order) => total + order)} €',
-                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       ListView(
                         shrinkWrap: true,
-                        children: data.map((order) => SizedBox(child: OrderCard(order: order))).toList(),
+                        children: data
+                            .map((order) => Wrap(
+                                  spacing: 5,
+                                  children: [OrderCard(order: order)],
+                                ))
+                            .toList(),
                       ),
                     ],
                   ),

@@ -14,7 +14,8 @@ class PizzaNotifier extends StateNotifier<List<Pizza>> {
   PizzaNotifier(this.ref) : super([]);
 
   Future<void> loadPizzas() async {
-    FirebaseFirestore.instance.collection('pizzas').get().then((snapshots) {
+    FirebaseFirestore.instance.collection('pizzas').orderBy('name').get().then(
+        (snapshots) {
       //state et l'appelation du StateNotifier List<Pizza>
       state = List.from(
         snapshots.docs

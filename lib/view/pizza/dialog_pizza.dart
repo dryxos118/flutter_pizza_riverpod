@@ -39,7 +39,7 @@ class PizzaDialog extends HookConsumerWidget {
           padding: kIsWeb ? EdgeInsets.all(20.0) : null,
           decoration: BoxDecoration(
             borderRadius: kIsWeb ? BorderRadius.circular(20) : null,
-            boxShadow: [
+            boxShadow: const [
               if (kIsWeb)
                 BoxShadow(
                   color: Colors.white,
@@ -50,15 +50,18 @@ class PizzaDialog extends HookConsumerWidget {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start, // Aligner les éléments au centre
+            crossAxisAlignment:
+                CrossAxisAlignment.start, // Aligner les éléments au centre
             children: [
               // Bouton pour fermer
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Aligner le texte et le bouton close
+                mainAxisAlignment: MainAxisAlignment
+                    .spaceBetween, // Aligner le texte et le bouton close
                 children: [
                   Text(
                     'Name : ${pizza.name}',
-                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
                     icon: const Icon(Icons.close, color: Colors.red),
@@ -89,7 +92,8 @@ class PizzaDialog extends HookConsumerWidget {
                       style: const TextStyle(fontSize: 16),
                     ),
                     activeColor: Colors.orange, // Couleur de sélection
-                    controlAffinity: ListTileControlAffinity.trailing, // Icône de radio à droite
+                    controlAffinity: ListTileControlAffinity
+                        .trailing, // Icône de radio à droite
                   );
                 }).toList(),
               ),
@@ -139,25 +143,30 @@ class PizzaDialog extends HookConsumerWidget {
               const SizedBox(height: 20),
 
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Aligner le texte et le bouton close
+                mainAxisAlignment: MainAxisAlignment
+                    .spaceBetween, // Aligner le texte et le bouton close
                 children: [
                   Text(
                     'Prix total: ${calculatePrice().toStringAsFixed(2)} €',
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                       ref.read(orderStreamProvider.notifier).addOrder(
-                            Orders(pizzasOrder: [
-                              PizzaOrder(
-                                id: pizza.id,
-                                name: pizza.name,
-                                quantity: quantity.value,
-                                size: selectedSize.value,
-                                price: calculatePrice(),
-                              )
-                            ], date: DateTime.now(), user: nameController.value.text),
+                            Orders(
+                                pizzasOrder: [
+                                  PizzaOrder(
+                                    id: pizza.id,
+                                    name: pizza.name,
+                                    quantity: quantity.value,
+                                    size: selectedSize.value,
+                                    price: calculatePrice(),
+                                  )
+                                ],
+                                date: DateTime.now(),
+                                user: nameController.value.text),
                           );
                     },
                     style: ElevatedButton.styleFrom(
