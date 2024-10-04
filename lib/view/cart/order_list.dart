@@ -17,12 +17,20 @@ class OrderList extends ConsumerWidget {
                 scrollDirection: Axis.vertical,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: data
-                        .map(
-                            (order) => SizedBox(child: OrderCard(order: order)))
-                        .toList(),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          'Prix total: ${data.map((pizzasOrder) => pizzasOrder.pizzasOrder.fold(0.0, (total, pizza) => total + pizza.price)).fold(0.0, (total, order) => total + order)} €',
+                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      ListView(
+                        shrinkWrap: true,
+                        children: data.map((order) => SizedBox(child: OrderCard(order: order))).toList(),
+                      ),
+                    ],
                   ),
                 ))
             : const Center(child: Text("Aucune commande")),

@@ -3,6 +3,7 @@ import 'package:flutter_pizza_riverpod/models/order.dart';
 import 'package:flutter_pizza_riverpod/service/order_provider.dart';
 import 'package:flutter_pizza_riverpod/service/snackbar_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class OrderCard extends ConsumerWidget {
   final Orders order;
@@ -27,7 +28,7 @@ class OrderCard extends ConsumerWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Date de la commande: ${order.date.toUtc().toIso8601String()}',
+              'Date de la commande: ${DateFormat('dd/MM').format(order.date)}',
               style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
             ),
             const SizedBox(height: 20),
@@ -35,23 +36,19 @@ class OrderCard extends ConsumerWidget {
               'Pizzas commandées:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text(order.pizzasOrder.map((x) => x.name).join("| ")),
+            Text(order.pizzasOrder.map((x) => '${x.name} - ${x.size}').join("| ")),
             const Divider(),
             Row(
               children: [
                 Text(
-                  'Prix total: ${order.pizzasOrder.fold(0.0, (total, pizza) => total + pizza.price).toStringAsFixed(2)} €',
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                  'Prix pour ${order.user} : ${order.pizzasOrder.fold(0.0, (total, pizza) => total + pizza.price).toStringAsFixed(2)} €',
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
                 TextButton(
                     onPressed: () {
-                      ref
-                          .watch(orderStreamProvider.notifier)
-                          .deleteOrder(order.id);
-                      SnackbarService(context).showSnackbar(
-                          title: "Commande Supprimer", type: Type.succes);
+                      ref.watch(orderStreamProvider.notifier).deleteOrder(order.id);
+                      SnackbarService(context).showSnackbar(title: "Commande Supprimée", type: Type.succes);
                     },
                     child: const Text("Delete"))
               ],
