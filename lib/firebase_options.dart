@@ -42,7 +42,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDUgtSzgW3-hB9GcLC9mX3gs9WWzhsP-dQ',
-    appId: '1:390762384296:web:9e7c4a26800f2decb36b9d',
+    appId: '1:390762384296:web:bb05a95690c5154eb36b9d',
     messagingSenderId: '390762384296',
     projectId: 'flutter-pizz',
     authDomain: 'flutter-pizz.firebaseapp.com',
