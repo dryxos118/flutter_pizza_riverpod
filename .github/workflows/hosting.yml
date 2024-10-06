@@ -1,0 +1,34 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Deploy to Firebase Hosting on push
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Build Flutter Web
+      run: flutter build web  # Build du projet Flutter pour le web
+
+    - name: Deploy to Firebase Hosting
+      run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
