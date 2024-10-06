@@ -31,4 +31,4 @@ jobs:
       run: flutter build web  # Build du projet Flutter pour le web
 
     - name: Deploy to Firebase Hosting
-      run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
+      run: firebase deploy --only hosting --token ${{ env.FIREBASE_TOKEN }}
